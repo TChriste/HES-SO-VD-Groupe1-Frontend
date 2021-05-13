@@ -5,6 +5,7 @@ import { throwError, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import {User} from './user.model';
 import {BASE_URL} from '../config/config';
+import {SignUpPatientModel} from './patient/sign-up-patient/sign-up-patient.model';
 
 export interface LoginResponseData {
   id: number;
@@ -23,11 +24,19 @@ export class LoginService {
   loginPatient(email: string, password: string) {
     return this.http
       .post<LoginResponseData>(
-        BASE_URL + '/patient/login',
+        BASE_URL + '/patient/sign-in',
         { email, password }
       ).pipe(catchError(this.handleError), tap(resData => {
         this.handleAuthentication(resData.id, resData.email, resData.nom, resData.prenom, 'PATIENT', 'NON_GERE', 3600);
       }));
+  }
+
+  signUpPatient(patientInfos: SignUpPatientModel) {
+    return this.http
+      .post<LoginResponseData>(
+        BASE_URL + '/patient/sign-up',
+        { patientInfos }
+      ).pipe(catchError(this.handleError));
   }
 
   autoLogin() {
@@ -59,7 +68,7 @@ export class LoginService {
 
   logout() {
     this.user.next(null);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/connexion']);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
@@ -87,10 +96,10 @@ export class LoginService {
     }
     switch (errorRes.status) {
       case 401:
-        errorMessage = 'Email ou mot de passe incorrect';
+        errorMessage = 'Email ou mot de passe incorrect !';
         break;
       default:
-        errorMessage = 'Une erreur est survenue';
+        errorMessage = 'Une erreur est survenue !';
         break;
     }
     return throwError(errorMessage);

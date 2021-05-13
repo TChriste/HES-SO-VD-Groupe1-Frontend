@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
-import {LoginResponseData, LoginService} from '../login.service';
+import {LoginResponseData, LoginService} from '../../login.service';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login-patient.component.html',
-  styleUrls: ['./login-patient.component.css']
+  templateUrl: './sign-in-patient.component.html',
+  styleUrls: ['./sign-in-patient.component.css']
 })
-export class LoginPatientComponent implements OnInit {
+export class SignInPatientComponent implements OnInit {
 
   loginObs: Observable<LoginResponseData>;
   error: string = null;

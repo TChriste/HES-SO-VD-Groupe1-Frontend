@@ -1,0 +1,218 @@
+<section>
+  <div class="container">
+      <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
+        <h2 class="title is-2">Inscription</h2>
+        <div class="message is-danger is-small" *ngIf="error">
+          <div class="message-body">
+            {{ error }}
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column">
+            <h3 class="title is-4">Patient</h3>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Nom</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="text" ngModel name="nom" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Prénom</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="text" ngModel name="prenom" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Date de naissance</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="date" ngModel name="dateNaissance">
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Rue</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="text" ngModel name="rue" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group field is-horizontal">
+              <div class="field-label">
+                <label class="label">NPA / Localité</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control is-expanded">
+                    <input class="input form-control" type="text" ngModel name="npa" required>
+                  </p>
+                </div>
+                <div class="field">
+                  <p class="control is-expanded">
+                    <input class="input form-control" type="text" ngModel name="localite" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Ecole</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <input class="input form-control" type="text" ngModel name="ecole" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Degré scolaire</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="text" ngModel name="degreScolaire" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Assurance</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="text" ngModel name="assurance" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Numéro AVS</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="text" ngModel name="numeroAVS" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="column">
+            <h3 class="title is-4">Représentant légal</h3>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Nom</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="text" ngModel name="representantLegalNom" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Prénom</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="text" ngModel name="representantLegalPrenom" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="title is-4 mt-6">Informations de connexion</h3>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Email</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="email" ngModel name="email" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Mot de passe</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="password" ngModel name="password" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group field is-horizontal">
+              <div class="field-label is-normal">
+                <label class="label">Confirmer le mot de passe</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <p class="control">
+                    <input class="input form-control" type="password2" ngModel name="password2" required>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group field mt-6">
+              <p class="control has-text-centered">
+                <button class="button is-fullwidth is-success" type="submit">S'inscrire</button>
+              </p>
+              <p class="control has-text-centered mt-1">
+                <button class="button is-fullwidth" routerLink="/connexion" type="button">Se connecter</button>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+</section>

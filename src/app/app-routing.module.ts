@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {LoginPatientComponent} from './login/patient/login-patient.component';
-import {AppComponent} from './app.component';
+import {SignInPatientComponent} from './login/patient/sign-in-patient/sign-in-patient.component';
 import {HomeComponent} from './home/home.component';
 import {LoginGuard} from './login/login.guard';
+import {SignUpPatientComponent} from './login/patient/sign-up-patient/sign-up-patient.component';
 
 
 const routes: Routes = [
   { path: '', component:  HomeComponent, canActivate: [LoginGuard]},
-  { path: 'login', component: LoginPatientComponent },
-  { path: '**', component: AppComponent },
+  { path: 'connexion', component: SignInPatientComponent },
+  { path: 'inscription', component: SignUpPatientComponent },
+  { path: '**', component: HomeComponent },
 ];
 
 @NgModule({
