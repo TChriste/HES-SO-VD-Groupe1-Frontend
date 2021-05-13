@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getPatientById();
+    // this.getPatientById();
   }
 
   getPatientById() {
