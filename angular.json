@@ -122,7 +122,9 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
+          "options": {
+            "baseHref": "https://github.com/TChriste/HES-SO-VD-Groupe1-Frontend"
+          }
         }
       }
     }
