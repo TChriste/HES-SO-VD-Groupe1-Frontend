@@ -10,18 +10,9 @@ import {LoginService} from './login/login.service';
 })
 export class AppComponent implements OnInit {
 
-  patient: Patient;
-
   constructor(private loginService: LoginService) {}
 
   ngOnInit() {
     this.loginService.autoLogin();
-    // this.getPatientById();
-  }
-
-  getPatientById() {
-    // return this.patientService.getPatientById(1).subscribe((res: Patient) => {
-    //   this.patient2 = res;
-    // });
   }
 }

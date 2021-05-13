@@ -15,7 +15,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.user.pipe(take(1), map(user => {
-      this.role = user.role;
+      if (user) {
+        this.role = user.role;
+      }
     })).subscribe();
   }
 
