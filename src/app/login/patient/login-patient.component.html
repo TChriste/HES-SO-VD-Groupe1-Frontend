@@ -1,0 +1,52 @@
+<section class="hero is-link is-fullheight-with-navbar">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1">Nom du service</h1>
+      <div class="columns is-variable is-8">
+        <div class="column">
+          <h2 class="title is-4">Explication du service</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus. Amet mattis vulputate enim
+            nulla aliquet porttitor lacus luctus. Sed libero enim sed faucibus turpis. Tempus urna et pharetra pharetra massa
+            massa ultricies mi. At in tellus integer feugiat scelerisque varius morbi. Sagittis vitae et leo duis ut diam
+            quam. Nullam eget felis eget nunc. Consectetur a erat nam at lectus urna duis. Ut diam quam nulla porttitor massa
+            id neque aliquam vestibulum. Suscipit tellus mauris a diam maecenas.</p>
+        </div>
+        <div class="column">
+          <h2 class="title is-4">Connexion</h2>
+          <div class="message is-danger is-small" *ngIf="error">
+            <div class="message-body">
+              {{ error }}
+            </div>
+          </div>
+          <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+            <div class="form-group field">
+                <p class="control has-icons-left has-icons-right">
+                  <input class="input form-control" type="email" placeholder="Email" ngModel name="email" required email>
+                  <span class="icon is-small is-left">
+                    <fa-icon [icon]="faEnvelope"></fa-icon>
+                  </span>
+                </p>
+            </div>
+            <div class="form-group field">
+              <p class="control has-icons-left">
+                <input class="input" type="password" placeholder="Password" ngModel name="password" required password>
+                <span class="icon is-small is-left">
+                  <fa-icon [icon]="faLock"></fa-icon>
+                </span>
+              </p>
+            </div>
+            <div class="form-group field">
+              <p><a href="">Pas encore inscrit ?</a></p>
+              <p class="control has-text-right">
+                <button class="button is-success">
+                  Se connecter
+                </button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
