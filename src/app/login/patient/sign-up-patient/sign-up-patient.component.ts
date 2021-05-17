@@ -5,6 +5,8 @@ import {SignUpPatientModel} from './sign-up-patient.model';
 import {LoginResponseData, LoginService} from '../../login.service';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {EcoleModel} from '../../../ecole/ecole.model';
+import {EcoleService} from '../../../ecole/ecole.service';
 
 @Component({
   selector: 'app-sign-up-patient',
@@ -16,20 +18,25 @@ export class SignUpPatientComponent implements OnInit {
   loginObs: Observable<LoginResponseData>;
   error: string;
   dateNaissanceSelected: Date;
+  ecoles: EcoleModel[];
+  ecoleSelected: EcoleModel = null;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService,
+              private ecoleService: EcoleService,
+              private router: Router) { }
 
   ngOnInit(): void {
     // Initialize all input of type date
     const bulmaCalendars = bulmaCalendar.attach('[type="date"]');
-
-    // Loop on each calendar initialized
     for (const calendar of bulmaCalendars) {
-      // Add listener to select event
       calendar.on('select', date => {
         this.dateNaissanceSelected = new Date(date.timeStamp);
       });
     }
+
+    this.ecoleService.getEcoles().subscribe( resData => {
+      this.ecoles = resData;
+    });
   }
 
   onSubmit(form: NgForm) {

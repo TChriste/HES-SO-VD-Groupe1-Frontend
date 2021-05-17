@@ -86,7 +86,11 @@
               <div class="field-body">
                 <div class="field">
                   <div class="control">
-                    <input class="input form-control" type="text" ngModel name="ecole" required>
+                    <div class="select is-fullwidth form-control">
+                      <select [(ngModel)]="ecoleSelected" name="ecole">
+                        <option *ngFor="let ecole of ecoles" [ngValue]="ecole">{{ecole.nom}}</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -98,9 +102,13 @@
               </div>
               <div class="field-body">
                 <div class="field">
-                  <p class="control">
-                    <input class="input form-control" type="text" ngModel name="degreScolaire" required>
-                  </p>
+                  <div class="control">
+                    <div class="select is-fullwidth form-control">
+                      <select ngModel name="degreScolaire">
+                        <option *ngFor="let degre of ecoleSelected?.degresScolaire" [ngValue]="degre.libelle">{{degre.libelle}}</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

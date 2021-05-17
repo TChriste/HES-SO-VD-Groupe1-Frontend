@@ -1,3 +1,5 @@
+import {EcoleModel} from '../../../ecole/ecole.model';
+
 export class SignUpPatientModel {
   constructor(
     public nom: string,
@@ -6,7 +8,7 @@ export class SignUpPatientModel {
     public rue: string,
     public npa: string,
     public localite: string,
-    public ecole: string,
+    public ecole: EcoleModel,
     public degreScolaire: string,
     public assurance: string,
     public numeroAVS: string,

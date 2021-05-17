@@ -32,11 +32,7 @@ export class LoginService {
   }
 
   signUpPatient(patientInfos: SignUpPatientModel) {
-    return this.http
-      .post<LoginResponseData>(
-        BASE_URL + '/patient/sign-up',
-        { patientInfos }
-      ).pipe(catchError(this.handleError));
+    return this.http.post<LoginResponseData>(BASE_URL + '/patient/sign-up', patientInfos).pipe(catchError(this.handleError));
   }
 
   autoLogin() {

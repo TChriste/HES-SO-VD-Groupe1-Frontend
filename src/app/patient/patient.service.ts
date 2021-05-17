@@ -32,7 +32,6 @@ export class PatientService {
     } else {
       message = `Error Code: ${err.status}\nMessage: ${err.message}`;
     }
-    console.log(message);
     return throwError(message);
   }
 }
