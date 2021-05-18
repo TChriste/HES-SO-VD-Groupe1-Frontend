@@ -1,1 +1,60 @@
-<p>patient works!</p>
+<section>
+  <div class="container">
+      <div class="description">
+        <h2 class="title is-2">Listes d'attente</h2>
+        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at
+          its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as
+          opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing
+          packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will
+          uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by
+          accident, sometimes on purpose (injected humour and the like).</p>
+      </div>
+      <div class="filtres mt-4">
+        <form #filtreForm="ngForm" (ngSubmit)="onSubmitFiltres(filtreForm)">
+        <div class="columns">
+          <div class="column is-2">
+            <div class="select">
+              <select>
+                <option>Select dropdown</option>
+                <option>With options</option>
+              </select>
+            </div>
+          </div>
+          <div class="column is-2">
+            <div class="select">
+              <select>
+                <option>Select dropdown</option>
+                <option>With options</option>
+              </select>
+            </div>
+          </div>
+          <div class="column is-2">
+            <div class="form-group field ">
+              <p class="control has-text-centered">
+                <button class="button is-primary is-fullwidth" type="submit">Filtrer</button>
+              </p>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+      <hr>
+      <div class="listes-attentes mt-4">
+        <form #listesForm="ngForm" (ngSubmit)="onSubmitListeAttente(listesForm)">
+          <app-liste-attente
+            *ngFor="let listeAttente of listesAttente; index as i"
+            [listeAttente]="listeAttente"
+          ></app-liste-attente>
+          <div class="columns mt-4">
+            <div class="column is-4 is-offset-8">
+              <div class="form-group field ">
+                <p class="control has-text-centered mt-1">
+                  <button class="button is-primary is-fullwidth" type="submit">Suivant</button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</section>

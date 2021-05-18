@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { PatientComponent } from './patient/patient.component';
 import { LogopedisteComponent } from './logopediste/logopediste.component';
 import { SignUpPatientComponent } from './login/patient/sign-up-patient/sign-up-patient.component';
+import { ListeAttenteComponent } from './patient/liste-attente/liste-attente.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SignUpPatientComponent } from './login/patient/sign-up-patient/sign-up-
     HomeComponent,
     PatientComponent,
     LogopedisteComponent,
-    SignUpPatientComponent
+    SignUpPatientComponent,
+    ListeAttenteComponent
   ],
   imports: [
     BrowserModule,
