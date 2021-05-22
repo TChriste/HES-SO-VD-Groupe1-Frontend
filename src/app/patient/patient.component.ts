@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
-import {ListeAttente} from './patient.model';
+import {ListeAttente, Specialisation} from './patient.model';
 import {PatientService} from './patient.service';
 import {avatar} from '../avatar';
+import {SpecialisationService} from '../specialisation/specialisation.service';
 
 @Component({
   selector: 'app-patient',
@@ -11,11 +12,16 @@ import {avatar} from '../avatar';
 })
 export class PatientComponent implements OnInit {
 
+  specialisations: Specialisation[];
+  specialisationSelected: Specialisation;
+
   listesAttente: ListeAttente[];
   form: FormGroup;
   src: string;
 
-  constructor(private formBuilder: FormBuilder, private patientService: PatientService) { }
+  constructor(private formBuilder: FormBuilder,
+              private patientService: PatientService,
+              private specialisationService: SpecialisationService) { }
 
   ngOnInit(): void {
     this.src =  'https://avataaars.io/?avatarStyle=Circle&topType=' + this.avatarRandom('topType') +
@@ -35,8 +41,12 @@ export class PatientComponent implements OnInit {
         checkboxes.addControl(option.id, new FormControl(false));
       });
     });
-
     this.form.valueChanges.subscribe(value => console.log(value));
+
+    this.specialisationSelected = null;
+    this.specialisationService.getSpecialisations().subscribe( resData => {
+      this.specialisations = resData;
+    });
   }
 
   onSubmitFiltres(form: NgForm) {

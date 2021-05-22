@@ -22,9 +22,9 @@
           </div>
           <div class="column is-2">
             <div class="select">
-              <select>
-                <option>Select dropdown</option>
-                <option>With options</option>
+              <select [(ngModel)]="specialisationSelected" name="ecole">
+                <option [ngValue]="null" selected="selected">Toutes</option>
+                <option *ngFor="let specialisation of specialisations" [ngValue]="specialisation">{{specialisation.libelle}}</option>
               </select>
             </div>
           </div>
