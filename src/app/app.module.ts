@@ -7,13 +7,12 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SignInPatientComponent } from './login/patient/sign-in-patient/sign-in-patient.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './home/home.component';
 import { PatientComponent } from './patient/patient.component';
 import { LogopedisteComponent } from './logopediste/logopediste.component';
 import { SignUpPatientComponent } from './login/patient/sign-up-patient/sign-up-patient.component';
-import { ListeAttenteComponent } from './patient/liste-attente/liste-attente.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +22,7 @@ import { ListeAttenteComponent } from './patient/liste-attente/liste-attente.com
     HomeComponent,
     PatientComponent,
     LogopedisteComponent,
-    SignUpPatientComponent,
-    ListeAttenteComponent
+    SignUpPatientComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +31,7 @@ import { ListeAttenteComponent } from './patient/liste-attente/liste-attente.com
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

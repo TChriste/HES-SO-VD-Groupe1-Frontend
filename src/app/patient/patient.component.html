@@ -39,22 +39,57 @@
         </form>
       </div>
       <hr>
-      <div class="listes-attentes mt-4">
-        <form #listesForm="ngForm" (ngSubmit)="onSubmitListeAttente(listesForm)">
-          <app-liste-attente
-            *ngFor="let listeAttente of listesAttente; index as i"
-            [listeAttente]="listeAttente"
-          ></app-liste-attente>
-          <div class="columns mt-4">
-            <div class="column is-4 is-offset-8">
-              <div class="form-group field ">
-                <p class="control has-text-centered mt-1">
-                  <button class="button is-primary is-fullwidth" type="submit">Suivant</button>
-                </p>
+      <form [formGroup]="form" (ngSubmit)="onSubmitListeAttente()">
+        <div class="listes-attentes mt-4">
+            <div formGroupName="checkboxes">
+              <div class="card mt-4" *ngFor="let item of listesAttente">
+                <div class="card-content">
+                  <div class="columns is-vcentered">
+                    <div class="column is-2">
+                      <div class="columns is-vcentered">
+                        <div class="column is-3">
+                          <label class="checkbox">
+                            <input type="checkbox" [formControlName]="item.id" [value]="item.id" />
+                          </label>
+                        </div>
+                        <div class="column is-9">
+                          <figure class="image is-96x96">
+                            <img [src]="src"/>
+                          </figure>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="column is-2">
+                      <p><strong>{{item.logopediste.nom}} {{item.logopediste.prenom}}</strong></p>
+                      <p>
+                        {{item.logopediste.rue}} <br>
+                        {{item.logopediste.npa}} {{item.logopediste.localite}}
+                      </p>
+                    </div>
+                    <div class="column is-3">
+                      <p><strong>Spécialisations</strong></p>
+                      <div class="tags are-medium">
+                        <span *ngFor="let specialisation of item.logopediste.specialisations" class="tag is-primary is-medium">{{specialisation.libelle}}</span>
+                      </div>
+                    </div>
+                    <div class="column is-4">
+                      <p>Prochaine disponibilité estimée à le 01.09.2021</p>
+                      <p>Nombre de patient en liste d'attente : 15</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-      </div>
+            <div class="columns mt-4">
+              <div class="column is-4 is-offset-8">
+                <div class="form-group field ">
+                  <p class="control has-text-centered mt-1">
+                    <button class="button is-primary is-fullwidth" type="submit">Suivant</button>
+                  </p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </form>
   </div>
 </section>

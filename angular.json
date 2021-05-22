@@ -29,7 +29,8 @@
               "node_modules/bulma-calendar/dist/css/bulma-calendar.min.css"
             ],
             "scripts": [
-              "node_modules/bulma-calendar/dist/js/bulma-calendar.min.js"
+              "node_modules/bulma-calendar/dist/js/bulma-calendar.min.js",
+              "node_modules/a-avataaar/a-avataaar.js?module"
             ]
           },
           "configurations": {
