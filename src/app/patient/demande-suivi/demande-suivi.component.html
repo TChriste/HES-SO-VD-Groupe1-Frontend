@@ -1,0 +1,117 @@
+<div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
+  <div class="modal-background" (click)="toggleModal()"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Informations complémentaires</p>
+      <button class="delete" aria-label="close" (click)="toggleModal()"></button>
+    </header>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <section class="modal-card-body">
+        <h5 class="title is-5">Disponibilités</h5>
+        <div formGroupName="dispos">
+          <div class="columns mt-2">
+            <div class="column is-2">
+              <p>Lundi</p>
+              <p>
+                <label class="checkbox">
+                  <input type="checkbox" value="lundi-matin" />
+                  Matin
+                </label>
+              </p>
+              <p>
+                <label class="checkbox">
+                  <input type="checkbox" value="lundi-aprem" />
+                  Après-midi
+                </label>
+              </p>
+            </div>
+            <div class="column is-2">
+              <p>Mardi</p>
+              <p>
+                <label class="checkbox">
+                  <input type="checkbox" value="mardi-matin" />
+                  Matin
+                </label>
+              </p>
+              <p>
+                <label class="checkbox">
+                  <input type="checkbox" value="mardi-aprem" />
+                  Après-midi
+                </label>
+              </p>
+            </div>
+            <div class="column is-2">
+              <p>Mercredi</p>
+              <p>
+                <label class="checkbox">
+                  <input type="checkbox" value="mercredi-matin" />
+                  Matin
+                </label>
+              </p>
+              <p>
+                <label class="checkbox">
+                  <input type="checkbox" value="mercredi-aprem" />
+                  Après-midi
+                </label>
+              </p>
+            </div>
+            <div class="column is-2">
+              <p>Jeudi</p>
+              <p>
+                <label class="checkbox">
+                  <input type="checkbox" value="jeudi-matin" />
+                  Matin
+                </label>
+              </p>
+              <p>
+                <label class="checkbox">
+                  <input type="checkbox" value="jeudi-aprem" />
+                  Après-midi
+                </label>
+              </p>
+            </div>
+            <div class="column is-2">
+              <p>Vendredi</p>
+              <p>
+                <label class="checkbox">
+                  <input type="checkbox" value="vendredi-matin" />
+                  Matin
+                </label>
+              </p>
+              <p>
+                <label class="checkbox">
+                  <input type="checkbox" value="vendredi-aprem" />
+                  Après-midi
+                </label>
+              </p>
+            </div>
+          </div>
+        </div>
+        <h5 class="title is-5 mt-5">Description des difficultés rencontrées</h5>
+        <textarea class="textarea"
+                  formControlName="description"
+                  placeholder="Décrivez, ici, librement, les raisons de votre demande logopédique"></textarea>
+
+        <h5 class="title is-5">Origine de la demande</h5>
+        <div class="control">
+          <p>
+            <label class="radio">
+              <input type="radio" formControlName="origine" value="medicale">
+              Recommandation par un(e) spécialiste du domaine médical (pédiatre, médecin de famille, psychothérapeute, etc.)
+            </label>
+          </p>
+          <p>
+            <label class="radio">
+              <input type="radio" formControlName="origine" value="scolaire">
+              Recommandation scolaire
+            </label>
+          </p>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button" (click)="toggleModal()">Cancel</button>
+        <button type="submit" class="button is-success">S'inscire sur les listes d'attentes</button>
+      </footer>
+    </form>
+  </div>
+</div>

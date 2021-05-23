@@ -39,7 +39,7 @@
         </form>
       </div>
       <hr>
-      <form [formGroup]="form" (ngSubmit)="onSubmitListeAttente()">
+      <form [formGroup]="form">
         <div class="listes-attentes mt-4">
             <div formGroupName="checkboxes">
               <div class="card mt-4" *ngFor="let item of listesAttente">
@@ -73,8 +73,8 @@
                       </div>
                     </div>
                     <div class="column is-4">
-                      <p>Prochaine disponibilité estimée à le 01.09.2021</p>
-                      <p>Nombre de patient en liste d'attente : 15</p>
+                      <p>Prochaine disponibilité estimée le 01.09.2021</p>
+                      <p>Nombre de patient(e)s en liste d'attente : 15</p>
                     </div>
                   </div>
                 </div>
@@ -84,12 +84,17 @@
               <div class="column is-4 is-offset-8">
                 <div class="form-group field ">
                   <p class="control has-text-centered mt-1">
-                    <button class="button is-primary is-fullwidth" type="submit">Suivant</button>
+                    <button class="button is-primary is-fullwidth" (click)="onSuivant()">Suivant</button>
                   </p>
                 </div>
               </div>
             </div>
         </div>
+        <app-demande-suivi [isModalActive]="isModalActive"
+                           [form]="form"
+                           (isModalActiveEvent)="valueChangeModalActive($event)"
+                           [idsListesSelectionnees]="idsListesSelectionnees">
+        </app-demande-suivi>
       </form>
   </div>
 </section>

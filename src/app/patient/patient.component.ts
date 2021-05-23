@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {ListeAttente, Specialisation} from './patient.model';
 import {PatientService} from './patient.service';
 import {avatar} from '../avatar';
 import {SpecialisationService} from '../specialisation/specialisation.service';
+import {DemandeSuiviComponent} from './demande-suivi/demande-suivi.component';
 
 @Component({
   selector: 'app-patient',
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css']
 })
-export class PatientComponent implements OnInit {
+export class PatientComponent implements OnInit, AfterViewInit {
+  @ViewChild(DemandeSuiviComponent) demandeSuiviComponent: DemandeSuiviComponent;
 
   specialisations: Specialisation[];
   specialisationSelected: Specialisation;
@@ -19,11 +21,15 @@ export class PatientComponent implements OnInit {
   form: FormGroup;
   src: string;
 
+  idsListesSelectionnees = [];
+  isModalActive: boolean;
+
   constructor(private formBuilder: FormBuilder,
               private patientService: PatientService,
               private specialisationService: SpecialisationService) { }
 
   ngOnInit(): void {
+    this.isModalActive = false;
     this.src =  'https://avataaars.io/?avatarStyle=Circle&topType=' + this.avatarRandom('topType') +
       '&accessoriesType=' + this.avatarRandom('accessoriesType') + '&hairColor=' + this.avatarRandom('hairColor') +
       '&facialHairType=' + this.avatarRandom('facialHairType') + '&clotheType=' + this.avatarRandom('clotheType') +
@@ -41,32 +47,36 @@ export class PatientComponent implements OnInit {
         checkboxes.addControl(option.id, new FormControl(false));
       });
     });
-    this.form.valueChanges.subscribe(value => console.log(value));
-
     this.specialisationSelected = null;
     this.specialisationService.getSpecialisations().subscribe( resData => {
       this.specialisations = resData;
     });
   }
 
+  ngAfterViewInit() {
+    this.form.addControl('form', this.demandeSuiviComponent.form);
+    this.demandeSuiviComponent.form.setParent(this.form);
+  }
+
   onSubmitFiltres(form: NgForm) {
     console.log(form);
   }
 
-  onSubmitListeAttente() {
+  onSuivant() {
     const values = this.form.value.checkboxes;
-    console.log(values);
-
-    const idsListesSelectionnees = [];
     Object.entries(values).forEach(item => {
-      const id = item[Object.keys(item)[0]];
+      const id = parseInt(item[Object.keys(item)[0]]);
       const checked = item[Object.keys(item)[1]];
 
       if (checked) {
-        idsListesSelectionnees.push(id);
+        this.idsListesSelectionnees.push(id);
       }
     });
-    console.log(idsListesSelectionnees);
+    this.isModalActive = true;
+  }
+
+  valueChangeModalActive(value: boolean) {
+    this.isModalActive = value;
   }
 
   avatarRandom(type: string) {
