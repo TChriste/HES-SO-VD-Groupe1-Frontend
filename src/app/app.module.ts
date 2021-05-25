@@ -14,6 +14,8 @@ import { PatientComponent } from './patient/patient.component';
 import { LogopedisteComponent } from './logopediste/logopediste.component';
 import { SignUpPatientComponent } from './login/patient/sign-up-patient/sign-up-patient.component';
 import { DemandeSuiviComponent } from './patient/demande-suivi/demande-suivi.component';
+import { MonCompteComponent } from './patient/mon-compte/mon-compte.component';
+import { DatePipe } from './shared/date.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { DemandeSuiviComponent } from './patient/demande-suivi/demande-suivi.com
     PatientComponent,
     LogopedisteComponent,
     SignUpPatientComponent,
-    DemandeSuiviComponent
+    DemandeSuiviComponent,
+    MonCompteComponent,
+    DatePipe
   ],
   imports: [
     BrowserModule,

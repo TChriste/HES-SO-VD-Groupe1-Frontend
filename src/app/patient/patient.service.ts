@@ -5,7 +5,7 @@ import {Disponibilite, ListeAttente} from './patient.model';
 import {Observable, throwError} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {BASE_URL} from '../config/config';
-import {DemandeSuiviModel} from './demande-suivi/demande-suivi.model';
+import {DemandeDeBilanCrationModel, DemandeDeBilanModel} from './demande-suivi/demande-de-bilan.model';
 
 
 @Injectable({
@@ -33,8 +33,13 @@ export class PatientService {
     );
   }
 
-  postDemandeSuivi(demandeSuivi: DemandeSuiviModel): Observable<any> {
+  postDemandeDeBilan(demandeSuivi: DemandeDeBilanCrationModel): Observable<any> {
     return this.httpClient.post<any>(BASE_URL + '/patient/demande-suivi', demandeSuivi)
+                          .pipe(catchError(this.processError));
+  }
+
+  getDemandesDeBilan(idPatient: number): Observable<any> {
+    return this.httpClient.get<DemandeDeBilanModel[]>(BASE_URL + '/patient/' + idPatient + '/demandes-bilan')
                           .pipe(catchError(this.processError));
   }
 

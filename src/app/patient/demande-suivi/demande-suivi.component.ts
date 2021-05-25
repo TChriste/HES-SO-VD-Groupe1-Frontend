@@ -2,7 +2,7 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {PatientService} from '../patient.service';
-import {DemandeSuiviModel} from './demande-suivi.model';
+import {DemandeDeBilanCrationModel} from './demande-de-bilan.model';
 import {Disponibilite} from '../patient.model';
 import {LoginService} from '../../login/login.service';
 
@@ -58,7 +58,7 @@ export class DemandeSuiviComponent implements OnInit {
       }
     });
 
-    const demandeSuivi = new DemandeSuiviModel(
+    const demandeSuivi = new DemandeDeBilanCrationModel(
       this.loginService.user.value.id,
       this.idsListesSelectionnees,
       this.idsDisponibilitesSelectionnees,
@@ -68,7 +68,7 @@ export class DemandeSuiviComponent implements OnInit {
 
     console.log(demandeSuivi);
 
-    this.patientService.postDemandeSuivi(demandeSuivi).subscribe(resData => {
+    this.patientService.postDemandeDeBilan(demandeSuivi).subscribe(resData => {
       console.log('Done');
     }, errorMessage => {
       console.warn(errorMessage);

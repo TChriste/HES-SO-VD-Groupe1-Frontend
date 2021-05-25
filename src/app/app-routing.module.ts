@@ -4,10 +4,12 @@ import {SignInPatientComponent} from './login/patient/sign-in-patient/sign-in-pa
 import {HomeComponent} from './home/home.component';
 import {LoginGuard} from './login/login.guard';
 import {SignUpPatientComponent} from './login/patient/sign-up-patient/sign-up-patient.component';
+import {MonCompteComponent} from './patient/mon-compte/mon-compte.component';
 
 
 const routes: Routes = [
   { path: '', component:  HomeComponent, canActivate: [LoginGuard]},
+  { path: 'mon-compte', component:  MonCompteComponent, canActivate: [LoginGuard]},
   { path: 'connexion', component: SignInPatientComponent },
   { path: 'inscription', component: SignUpPatientComponent },
   { path: '**', component: HomeComponent },

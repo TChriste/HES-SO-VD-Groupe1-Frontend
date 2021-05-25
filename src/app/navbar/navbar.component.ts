@@ -9,12 +9,17 @@ import {map, take} from 'rxjs/operators';
 })
 export class NavbarComponent implements OnInit {
 
+  isLogged: boolean;
+
   constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
+    this.checkLoggin().subscribe(res => {
+      this.isLogged = res;
+    });
   }
 
-  isLogged() {
+  checkLoggin() {
     return this.loginService.user.pipe(take(1), map(user => {
       const isAuth = !!user;
       if (isAuth) {

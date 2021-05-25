@@ -8,16 +8,14 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <section class="modal-card-body">
         <h5 class="title is-5">Disponibilités</h5>
-        <div formGroupName="dispos">
-          <div class="columns mt-2">
-            <div class="column" *ngFor="let dispo of disponibilites">
+        <div formGroupName="dispos" class="columns is-multiline mt-2">
+          <div *ngFor="let dispo of disponibilites" class="column is-6">
               <p>
                 <label class="checkbox">
                   <input type="checkbox" [formControlName]="dispo.id" [value]="dispo.id"/>
                   {{dispo.libelle}}
                 </label>
               </p>
-            </div>
           </div>
         </div>
         <h5 class="title is-5 mt-5">Description des difficultés rencontrées</h5>
