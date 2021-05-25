@@ -10,78 +10,11 @@
         <h5 class="title is-5">Disponibilités</h5>
         <div formGroupName="dispos">
           <div class="columns mt-2">
-            <div class="column is-2">
-              <p>Lundi</p>
+            <div class="column" *ngFor="let dispo of disponibilites">
               <p>
                 <label class="checkbox">
-                  <input type="checkbox" value="lundi-matin" />
-                  Matin
-                </label>
-              </p>
-              <p>
-                <label class="checkbox">
-                  <input type="checkbox" value="lundi-aprem" />
-                  Après-midi
-                </label>
-              </p>
-            </div>
-            <div class="column is-2">
-              <p>Mardi</p>
-              <p>
-                <label class="checkbox">
-                  <input type="checkbox" value="mardi-matin" />
-                  Matin
-                </label>
-              </p>
-              <p>
-                <label class="checkbox">
-                  <input type="checkbox" value="mardi-aprem" />
-                  Après-midi
-                </label>
-              </p>
-            </div>
-            <div class="column is-2">
-              <p>Mercredi</p>
-              <p>
-                <label class="checkbox">
-                  <input type="checkbox" value="mercredi-matin" />
-                  Matin
-                </label>
-              </p>
-              <p>
-                <label class="checkbox">
-                  <input type="checkbox" value="mercredi-aprem" />
-                  Après-midi
-                </label>
-              </p>
-            </div>
-            <div class="column is-2">
-              <p>Jeudi</p>
-              <p>
-                <label class="checkbox">
-                  <input type="checkbox" value="jeudi-matin" />
-                  Matin
-                </label>
-              </p>
-              <p>
-                <label class="checkbox">
-                  <input type="checkbox" value="jeudi-aprem" />
-                  Après-midi
-                </label>
-              </p>
-            </div>
-            <div class="column is-2">
-              <p>Vendredi</p>
-              <p>
-                <label class="checkbox">
-                  <input type="checkbox" value="vendredi-matin" />
-                  Matin
-                </label>
-              </p>
-              <p>
-                <label class="checkbox">
-                  <input type="checkbox" value="vendredi-aprem" />
-                  Après-midi
+                  <input type="checkbox" [formControlName]="dispo.id" [value]="dispo.id"/>
+                  {{dispo.libelle}}
                 </label>
               </p>
             </div>
@@ -96,13 +29,13 @@
         <div class="control">
           <p>
             <label class="radio">
-              <input type="radio" formControlName="origine" value="medicale">
+              <input type="radio" formControlName="origine" value="RECOMMANDATION_MEDICALE">
               Recommandation par un(e) spécialiste du domaine médical (pédiatre, médecin de famille, psychothérapeute, etc.)
             </label>
           </p>
           <p>
             <label class="radio">
-              <input type="radio" formControlName="origine" value="scolaire">
+              <input type="radio" formControlName="origine" value="RECOMMANDATION_SCOLAIRE">
               Recommandation scolaire
             </label>
           </p>
