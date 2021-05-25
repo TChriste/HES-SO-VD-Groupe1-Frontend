@@ -27,15 +27,20 @@ export class Logopediste {
   public rue: string;
   public npa: string;
   public localite: string;
+  public idRegion: number;
+  public libelleRegion: string;
   public specialisations: Specialisation[];
 
-  constructor(id: number, nom: string, prenom: string, rue: string, npa: string, localite: string, specialisations: Specialisation[]) {
+  constructor(id: number, nom: string, prenom: string, rue: string, npa: string, localite: string,
+              idRegion: number, libelleRegion: string, specialisations: Specialisation[]) {
     this.id = id;
     this.nom = nom;
     this.prenom = prenom;
     this.rue = rue;
     this.npa = npa;
     this.localite = localite;
+    this.idRegion = idRegion;
+    this.libelleRegion = libelleRegion;
     this.specialisations = specialisations;
   }
 }

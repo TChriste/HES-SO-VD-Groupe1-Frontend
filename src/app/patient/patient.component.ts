@@ -1,10 +1,12 @@
-import {AfterContentInit, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {ListeAttente, Specialisation} from './patient.model';
 import {PatientService} from './patient.service';
 import {avatar} from '../avatar';
 import {SpecialisationService} from '../specialisation/specialisation.service';
 import {DemandeSuiviComponent} from './demande-suivi/demande-suivi.component';
+import {RegionModel} from '../region/region.model';
+import {RegionService} from '../region/region.service';
 
 @Component({
   selector: 'app-patient',
@@ -17,7 +19,11 @@ export class PatientComponent implements OnInit, AfterViewInit {
   specialisations: Specialisation[];
   specialisationSelected: Specialisation;
 
+  regions: RegionModel[];
+  regionSelected: RegionModel;
+
   listesAttente: ListeAttente[];
+  listesAttenteComplete: ListeAttente[];
   form: FormGroup;
   src: string;
 
@@ -26,7 +32,8 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   constructor(private formBuilder: FormBuilder,
               private patientService: PatientService,
-              private specialisationService: SpecialisationService) { }
+              private specialisationService: SpecialisationService,
+              private regionService: RegionService) { }
 
   ngOnInit(): void {
     this.isModalActive = false;
@@ -42,6 +49,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
     this.patientService.getListesAttente().subscribe(data => {
       this.listesAttente = data;
+      this.listesAttenteComplete = data;
       const checkboxes = this.form.get('checkboxes') as FormGroup;
       this.listesAttente.forEach((option: any) => {
         checkboxes.addControl(option.id, new FormControl(false));
@@ -51,6 +59,11 @@ export class PatientComponent implements OnInit, AfterViewInit {
     this.specialisationService.getSpecialisations().subscribe( resData => {
       this.specialisations = resData;
     });
+
+    this.regionSelected = null;
+    this.regionService.getRegions().subscribe( resData => {
+      this.regions = resData;
+    });
   }
 
   ngAfterViewInit() {
@@ -59,7 +72,22 @@ export class PatientComponent implements OnInit, AfterViewInit {
   }
 
   onSubmitFiltres(form: NgForm) {
-    console.log(form);
+    if (this.specialisationSelected && this.regionSelected) {
+      this.listesAttente = this.listesAttenteComplete.filter(
+        liste => (liste.logopediste.specialisations.some(specialisation => specialisation.id === this.specialisationSelected.id)) &&
+                 (liste.logopediste.idRegion === this.regionSelected.id)
+      );
+    } else if (this.regionSelected) {
+      this.listesAttente = this.listesAttenteComplete.filter(
+        liste => (liste.logopediste.idRegion === this.regionSelected.id)
+      );
+    } else if (this.specialisationSelected) {
+      this.listesAttente = this.listesAttenteComplete.filter(
+        liste => (liste.logopediste.specialisations.some(specialisation => specialisation.id === this.specialisationSelected.id))
+      );
+    } else {
+      this.listesAttente = this.listesAttenteComplete;
+    }
   }
 
   onSuivant() {

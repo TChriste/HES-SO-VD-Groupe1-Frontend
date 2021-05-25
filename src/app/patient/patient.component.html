@@ -14,10 +14,12 @@
         <div class="columns">
           <div class="column is-2">
             <div class="select">
-              <select>
-                <option>Select dropdown</option>
-                <option>With options</option>
-              </select>
+              <div class="select">
+                <select [(ngModel)]="regionSelected" name="ecole">
+                  <option [ngValue]="null" selected="selected">Toutes</option>
+                  <option *ngFor="let region of regions" [ngValue]="region">{{region.libelle}}</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="column is-2">
