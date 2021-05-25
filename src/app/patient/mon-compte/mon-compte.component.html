@@ -1,0 +1,61 @@
+<section>
+  <div class="container">
+    <h2 class="title is-2">Mon compte - Demandes de bilan</h2>
+    <div class="tabs">
+      <ul>
+        <li [class]="(this.ongletActif === this.ongletDonneesPersonnelles) ? 'is-active' : ''"
+            (click)="setOngletDonneesPersonnelles()"><a>Données personnelles</a></li>
+        <li [class]="(this.ongletActif === this.ongletDemandeDeBilan) ? 'is-active' : ''"
+            (click)="setOngletDemandesDeBilan()"><a>Demandes de bilans</a></li>
+      </ul>
+    </div>
+    <div class="demandes" *ngIf="ongletActif === ongletDonneesPersonnelles">
+      <div class="message is-info">
+        <div class="message-body">
+          <p>Cette partie n'est pas implémentée.</p>
+        </div>
+      </div>
+    </div>
+    <div class="demandes" *ngIf="ongletActif === ongletDemandeDeBilan">
+      <div class="card mt-4" *ngFor="let demande of demandes">
+        <div class="card-content">
+          <div class="columns is-vcentered">
+            <div class="column is-10">
+              <div class="columns">
+                <div class="column is-4">
+                  <p><strong>Date d'inscription</strong> <br>{{demande.date | date}}</p>
+                </div>
+                <div class="column is-8">
+                  <p><strong>Logopédistes</strong><br>
+                    <span *ngFor="let liste of demande.listesAttente; let index=index;">
+                      {{liste.logopediste.nom}} {{liste.logopediste.prenom}}
+                      <span *ngIf="index !== demande.listesAttente.length - 1">/</span>
+                  </span></p>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-4">
+                  <p class="mt-4"><strong>Disponibilités</strong><br>
+                    <span *ngFor="let dispo of demande.disponibilites; let index=index;">{{dispo.libelle}}
+                      <span *ngIf="index !== demande.disponibilites.length - 1">, </span>
+                    </span>
+                  </p>
+                </div>
+                <div class="column is-8">
+                  <p class="mt-4"><strong>Description des difficultés</strong> <br>{{demande.description}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="column is-2">
+              <div class="tags are-medium is-justify-content-center">
+                <span class="tag is-primary is-medium">{{getStatut(demande.statut)}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
