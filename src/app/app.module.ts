@@ -16,6 +16,7 @@ import { SignUpPatientComponent } from './login/patient/sign-up-patient/sign-up-
 import { DemandeSuiviComponent } from './patient/demande-suivi/demande-suivi.component';
 import { MonCompteComponent } from './patient/mon-compte/mon-compte.component';
 import { DatePipe } from './shared/date.pipe';
+import { AvatarImgComponent } from './patient/avatar-img/avatar-img.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DatePipe } from './shared/date.pipe';
     SignUpPatientComponent,
     DemandeSuiviComponent,
     MonCompteComponent,
-    DatePipe
+    DatePipe,
+    AvatarImgComponent
   ],
   imports: [
     BrowserModule,

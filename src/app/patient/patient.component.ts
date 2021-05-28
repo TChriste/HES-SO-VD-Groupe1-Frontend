@@ -25,7 +25,6 @@ export class PatientComponent implements OnInit, AfterViewInit {
   listesAttente: ListeAttente[];
   listesAttenteComplete: ListeAttente[];
   form: FormGroup;
-  src: string;
 
   idsListesSelectionnees = [];
   isModalActive: boolean;
@@ -37,11 +36,6 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.isModalActive = false;
-    this.src =  'https://avataaars.io/?avatarStyle=Circle&topType=' + this.avatarRandom('topType') +
-      '&accessoriesType=' + this.avatarRandom('accessoriesType') + '&hairColor=' + this.avatarRandom('hairColor') +
-      '&facialHairType=' + this.avatarRandom('facialHairType') + '&clotheType=' + this.avatarRandom('clotheType') +
-      '&eyeType=' + this.avatarRandom('eyeType') + '&eyebrowType=' + this.avatarRandom('eyebrowType') +
-      '&mouthType=' + this.avatarRandom('mouthType') + '&skinColor=' + this.avatarRandom('skinColor');
 
     this.form = this.formBuilder.group({
       checkboxes: this.formBuilder.group({}),
@@ -105,9 +99,5 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   valueChangeModalActive(value: boolean) {
     this.isModalActive = value;
-  }
-
-  avatarRandom(type: string) {
-    return avatar[type][Math.floor(Math.random() * avatar[type].length)];
   }
 }
