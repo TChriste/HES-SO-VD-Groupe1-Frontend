@@ -41,7 +41,10 @@
         </form>
       </div>
       <hr>
-      <form [formGroup]="form">
+      <div *ngIf="isLoading" style="text-align: center;">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <form [formGroup]="form" *ngIf="!isLoading">
         <div class="listes-attentes mt-4">
             <div formGroupName="checkboxes">
               <div class="card mt-4" *ngFor="let item of listesAttente">

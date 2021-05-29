@@ -16,6 +16,8 @@ import {RegionService} from '../region/region.service';
 export class PatientComponent implements OnInit, AfterViewInit {
   @ViewChild(DemandeSuiviComponent) demandeSuiviComponent: DemandeSuiviComponent;
 
+  isLoading = false;
+
   specialisations: Specialisation[];
   specialisationSelected: Specialisation;
 
@@ -41,8 +43,10 @@ export class PatientComponent implements OnInit, AfterViewInit {
       checkboxes: this.formBuilder.group({}),
     });
 
+    this.isLoading = true;
     this.patientService.getListesAttente().subscribe(data => {
       this.listesAttente = data;
+      this.isLoading = false;
       this.listesAttenteComplete = data;
       const checkboxes = this.form.get('checkboxes') as FormGroup;
       this.listesAttente.forEach((option: any) => {
