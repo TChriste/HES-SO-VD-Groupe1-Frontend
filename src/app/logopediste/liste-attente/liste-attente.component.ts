@@ -44,8 +44,8 @@ export class ListeAttenteComponent implements OnInit {
     }
   }
 
-  removeDemandeDeBilan(idDemandeDeBilan: number) {
-    this.logopedisteService.removeDemandeDeBilan(this.idListeAttente, idDemandeDeBilan).subscribe(() => {
+  refuserDemandeDeBilan(idDemandeDeBilan: number) {
+    this.logopedisteService.refuserDemandeDeBilan(this.idListeAttente, idDemandeDeBilan).subscribe(() => {
       this.confirmation = 'La demande a bien été supprimée de votre liste d\'attente';
       this.demandes = this.demandes.filter(demande => {
         return demande.id !== idDemandeDeBilan;
@@ -54,4 +54,17 @@ export class ListeAttenteComponent implements OnInit {
       this.error = errorMessage;
     });
   }
+
+
+  accepterDemandeDeBilan(idDemandeDeBilan: number) {
+    this.logopedisteService.accepterDemandeDeBilan(this.idListeAttente, idDemandeDeBilan).subscribe(() => {
+      this.confirmation = 'La demande a bien été acceptée';
+      this.demandes.filter(demande => {
+        demande.statut = 'ACCEPTEE';
+      });
+    }, errorMessage => {
+      this.error = errorMessage;
+    });
+  }
+
 }

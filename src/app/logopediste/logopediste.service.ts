@@ -25,9 +25,18 @@ export class LogopedisteService {
     );
   }
 
-  removeDemandeDeBilan(idListeAttente: number, idDemandeBilan: number): Observable<ListeAttenteVueLogoModel> {
+  refuserDemandeDeBilan(idListeAttente: number, idDemandeBilan: number): Observable<ListeAttenteVueLogoModel> {
     return this.httpClient.put<ListeAttenteVueLogoModel>(
-      BASE_URL + '/logopediste/liste-attente/' + idListeAttente + '/demande/' + idDemandeBilan, {}
+      BASE_URL + '/logopediste/liste-attente/' + idListeAttente + '/demande/' + idDemandeBilan + '/refuser', {}
+    ).pipe(
+      retry(1),
+      catchError(this.processError)
+    );
+  }
+
+  accepterDemandeDeBilan(idListeAttente: number, idDemandeBilan: number): Observable<ListeAttenteVueLogoModel> {
+    return this.httpClient.put<ListeAttenteVueLogoModel>(
+      BASE_URL + '/logopediste/liste-attente/' + idListeAttente + '/demande/' + idDemandeBilan + '/accepter', {}
     ).pipe(
       retry(1),
       catchError(this.processError)

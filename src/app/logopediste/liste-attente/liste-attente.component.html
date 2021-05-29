@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="listes-attentes mt-4">
-    <div class="message is-info" *ngIf="demandes.length <= 0">
+    <div class="message is-info" *ngIf="demandes && demandes.length <= 0">
       <div class="message-body">
         Aucune demande
       </div>
@@ -63,10 +63,10 @@
           <div class="column is-6 is-offset-6">
             <div class="columns">
               <div class="column is-6">
-                <button class="button is-fullwidth is-primary">Accepter</button>
+                <button class="button is-fullwidth is-primary" (click)="accepterDemandeDeBilan(demande.id)">Accepter</button>
               </div>
               <div class="column is-6">
-                <button class="button is-fullwidth is-danger" (click)="removeDemandeDeBilan(demande.id)">Refuser</button>
+                <button class="button is-fullwidth is-danger" (click)="refuserDemandeDeBilan(demande.id)">Refuser</button>
               </div>
             </div>
           </div>
