@@ -10,6 +10,7 @@ import {SignUpPatientModel} from './patient/sign-up-patient/sign-up-patient.mode
 export interface LoginResponseData {
   id: number;
   email: string;
+  numPrestataire: string;
   nom: string;
   prenom: string;
 }
@@ -27,7 +28,17 @@ export class LoginService {
         BASE_URL + '/patient/sign-in',
         { email, password }
       ).pipe(catchError(this.handleError), tap(resData => {
-        this.handleAuthentication(resData.id, resData.email, resData.nom, resData.prenom, 'PATIENT', 'NON_GERE', 3600);
+        this.handleAuthentication(resData.id, resData.email, resData.numPrestataire, resData.nom, resData.prenom, 'PATIENT', 'NON_GERE', 3600);
+      }));
+  }
+
+  loginLogopediste(numPrestataire: string, password: string) {
+    return this.http
+      .post<LoginResponseData>(
+        BASE_URL + '/logopediste/sign-in',
+        { numPrestataire, password }
+      ).pipe(catchError(this.handleError), tap(resData => {
+        this.handleAuthentication(resData.id, null, resData.numPrestataire, resData.nom, resData.prenom, 'LOGOPEDISTE', 'NON_GERE', 3600);
       }));
   }
 
@@ -39,6 +50,7 @@ export class LoginService {
     const userData: {
       id: number;
       email: string;
+      numPrestataire: string;
       nom: string;
       prenom: string;
       role: string;
@@ -52,7 +64,7 @@ export class LoginService {
 
     const expirationDate = new Date();
     expirationDate.setMinutes(expirationDate.getMinutes() + 15);
-    const loadedUser = new User(userData.id, userData.email, userData.nom, userData.prenom, userData.role,
+    const loadedUser = new User(userData.id, userData.email, userData.numPrestataire, userData.nom, userData.prenom, userData.role,
                                 userData._token, new Date(userData._tokenExpirationDate));
 
     if (loadedUser.token) {
@@ -77,9 +89,9 @@ export class LoginService {
     }, expirationDuration);
   }
 
-  private handleAuthentication(id: number, email: string, nom: string, prenom: string, role: string, token: string, expiresIn: number) {
+  private handleAuthentication(id: number, email: string, numPrestataire: string, nom: string, prenom: string, role: string, token: string, expiresIn: number) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-    const user = new User(id, email, nom, prenom, role, token, expirationDate);
+    const user = new User(id, email, numPrestataire, nom, prenom, role, token, expirationDate);
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));

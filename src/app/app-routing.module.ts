@@ -5,6 +5,7 @@ import {HomeComponent} from './home/home.component';
 import {LoginGuard} from './login/login.guard';
 import {SignUpPatientComponent} from './login/patient/sign-up-patient/sign-up-patient.component';
 import {MonCompteComponent} from './patient/mon-compte/mon-compte.component';
+import {SignInLogopedisteComponent} from './login/logopediste/sign-in-logopediste/sign-in-logopediste.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'mon-compte', component:  MonCompteComponent, canActivate: [LoginGuard]},
   { path: 'connexion', component: SignInPatientComponent },
   { path: 'inscription', component: SignUpPatientComponent },
+  { path: 'connexion-logopediste', component: SignInLogopedisteComponent },
   { path: '**', component: HomeComponent },
 ];
 

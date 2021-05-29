@@ -18,11 +18,15 @@ import { MonCompteComponent } from './patient/mon-compte/mon-compte.component';
 import { DatePipe } from './shared/date.pipe';
 import { AvatarImgComponent } from './patient/avatar-img/avatar-img.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import {SignInLogopedisteComponent} from './login/logopediste/sign-in-logopediste/sign-in-logopediste.component';
+import { DashboardComponent } from './logopediste/dashboard/dashboard.component';
+import { ListeAttenteComponent } from './logopediste/liste-attente/liste-attente.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInPatientComponent,
+    SignInLogopedisteComponent,
     NavbarComponent,
     HomeComponent,
     PatientComponent,
@@ -32,7 +36,9 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     MonCompteComponent,
     DatePipe,
     AvatarImgComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    DashboardComponent,
+    ListeAttenteComponent
   ],
   imports: [
     BrowserModule,
