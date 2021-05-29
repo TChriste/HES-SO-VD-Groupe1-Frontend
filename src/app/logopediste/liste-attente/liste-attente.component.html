@@ -35,7 +35,7 @@
               Rue : {{demande.patient.rue}} <br>
               Localité : {{demande.patient.localite}} <br>
               Ecole : {{demande.patient.ecole}} <br>
-              Degrés scolaire : {{demande.patient.degreScolaire}} <br>
+              Degré scolaire : {{demande.patient.degreScolaire}} <br>
               Assurance : {{demande.patient.assurance}} <br>
               N° AVS : {{demande.patient.numAVS}} <br>
               <br>
@@ -50,7 +50,7 @@
             <p><strong>Origine de la demande :</strong><br>{{demande.origine}}</p>
           </div>
           <div class="column is-3">
-            <p><strong>Disponibilités</strong><br>
+            <p><strong>Disponibilité(s)</strong><br>
               <span *ngFor="let dispo of demande.disponibilites; let index=index;">{{dispo.libelle}}
                 <span *ngIf="index !== demande.disponibilites.length - 1">, </span>
               </span>

@@ -6,7 +6,7 @@
         <li [class]="(this.ongletActif === this.ongletDonneesPersonnelles) ? 'is-active' : ''"
             (click)="setOngletDonneesPersonnelles()"><a>Données personnelles</a></li>
         <li [class]="(this.ongletActif === this.ongletDemandeDeBilan) ? 'is-active' : ''"
-            (click)="setOngletDemandesDeBilan()"><a>Demandes de bilans</a></li>
+            (click)="setOngletDemandesDeBilan()"><a>Demandes de bilan</a></li>
       </ul>
     </div>
     <div class="demandes" *ngIf="ongletActif === ongletDonneesPersonnelles">
@@ -26,7 +26,10 @@
                   <p><strong>Date d'inscription</strong> <br>{{demande.date | date}}</p>
                 </div>
                 <div class="column is-8">
-                  <p><strong>Logopédistes</strong><br>
+                  <p>
+                  <strong *ngIf="demande.statut === 'EN_ATTENTE'">Demande en attente chez :</strong>
+                  <strong *ngIf="demande.statut === 'ACCEPTEE'">Vous serez contacté(e) prochainement par :</strong>
+                  <strong *ngIf="demande.statut === 'REFUSEE'">Demande à reconduire</strong><br>
                     <span *ngFor="let liste of demande.listesAttente; let index=index;">
                       {{liste.logopediste.nom}} {{liste.logopediste.prenom}}
                       <span *ngIf="index !== demande.listesAttente.length - 1">/</span>
@@ -35,7 +38,7 @@
               </div>
               <div class="columns">
                 <div class="column is-4">
-                  <p class="mt-4"><strong>Disponibilités</strong><br>
+                  <p class="mt-4"><strong>Disponibilité(s)</strong><br>
                     <span *ngFor="let dispo of demande.disponibilites; let index=index;">{{dispo.libelle}}
                       <span *ngIf="index !== demande.disponibilites.length - 1">, </span>
                     </span>
