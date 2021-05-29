@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PatientService} from '../patient.service';
 import {DemandeDeBilanModel} from '../demande-suivi/demande-de-bilan.model';
+import {LoginService} from '../../login/login.service';
 
 @Component({
   selector: 'app-mon-compte',
@@ -16,11 +17,11 @@ export class MonCompteComponent implements OnInit {
 
   demandes: DemandeDeBilanModel[];
 
-  constructor(private patientService: PatientService) { }
+  constructor(private patientService: PatientService, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.ongletActif = this.ongletDonneesPersonnelles;
-    this.patientService.getDemandesDeBilan(37).subscribe(res => this.demandes = res);
+    this.patientService.getDemandesDeBilan(this.loginService.user.value.id).subscribe(res => this.demandes = res);
   }
 
   setOngletDonneesPersonnelles() {

@@ -5,6 +5,7 @@ import {PatientService} from '../patient.service';
 import {DemandeDeBilanCrationModel} from './demande-de-bilan.model';
 import {Disponibilite} from '../patient.model';
 import {LoginService} from '../../login/login.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-demande-suivi',
@@ -24,7 +25,8 @@ export class DemandeSuiviComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private patientService: PatientService,
-              private loginService: LoginService) {}
+              private loginService: LoginService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -69,7 +71,7 @@ export class DemandeSuiviComponent implements OnInit {
     console.log(demandeSuivi);
 
     this.patientService.postDemandeDeBilan(demandeSuivi).subscribe(resData => {
-      console.log('Done');
+      this.router.navigate(['/mon-compte']);
     }, errorMessage => {
       console.warn(errorMessage);
     });
