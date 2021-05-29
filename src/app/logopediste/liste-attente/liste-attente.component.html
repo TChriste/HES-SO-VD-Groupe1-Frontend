@@ -1,4 +1,73 @@
-<section>
+<section class="mt-6">
   <h2 class="title is-2">Liste d'attente</h2>
+  <div class="mt-4" *ngIf="isLoading" style="text-align: center;">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div class="message is-danger" *ngIf="error">
+    <div class="message-body">
+      {{ error }}
+    </div>
+  </div>
+  <div class="message is-success" *ngIf="confirmation">
+    <div class="message-body">
+      {{ confirmation }}
+    </div>
+  </div>
+  <div class="listes-attentes mt-4">
+    <div class="card mt-4" *ngFor="let demande of demandes">
+      <div class="card-content">
+        <div class="columns is-vcentered">
+          <div class="column is-12">
+            <p><strong>Date d'inscription :</strong> {{demande.date | date}}</p>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-4">
+            <p><strong>Patient(e) :</strong><br>
+              Nom : {{demande.patient.nom}} <br>
+              Prénom : {{demande.patient.prenom}} <br>
+              Date de naissance : {{demande.patient.dateNaissance | date}} <br>
+              Rue : {{demande.patient.rue}} <br>
+              Localité : {{demande.patient.localite}} <br>
+              Ecole : {{demande.patient.ecole}} <br>
+              Degrés scolaire : {{demande.patient.degreScolaire}} <br>
+              Assurance : {{demande.patient.assurance}} <br>
+              N° AVS : {{demande.patient.numAVS}} <br>
+              <br>
+              <strong>Représentant(e) légal(e) :</strong><br>
+              Nom : {{demande.patient.representantLegalNom}} <br>
+              Prénom : {{demande.patient.representantLegalPrenom}} <br>
+          </div>
+          <div class="column is-5">
+            <p><strong>Description :</strong><br>
+            {{demande.description}}</p>
+            <br>
+            <p><strong>Origine de la demande :</strong><br>{{demande.origine}}</p>
+          </div>
+          <div class="column is-3">
+            <p><strong>Disponibilités</strong><br>
+              <span *ngFor="let dispo of demande.disponibilites; let index=index;">{{dispo.libelle}}
+                <span *ngIf="index !== demande.disponibilites.length - 1">, </span>
+              </span>
+            </p>
+            <br>
+            <p><strong>Statut : </strong>{{getStatut(demande.statut)}}</p>
+          </div>
+        </div>
+        <div class="columns" *ngIf="demande.statut === 'EN_ATTENTE'">
+          <div class="column is-6 is-offset-6">
+            <div class="columns">
+              <div class="column is-6">
+                <button class="button is-fullwidth is-primary">Accepter</button>
+              </div>
+              <div class="column is-6">
+                <button class="button is-fullwidth is-danger" (click)="removeDemandeDeBilan(demande.id)">Refuser</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
