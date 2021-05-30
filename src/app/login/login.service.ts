@@ -63,7 +63,7 @@ export class LoginService {
     }
 
     const expirationDate = new Date();
-    expirationDate.setMinutes(expirationDate.getMinutes() + 15);
+    expirationDate.setMinutes(expirationDate.getMinutes() + 3600);
     const loadedUser = new User(userData.id, userData.email, userData.numPrestataire, userData.nom, userData.prenom, userData.role,
                                 userData._token, new Date(userData._tokenExpirationDate));
 

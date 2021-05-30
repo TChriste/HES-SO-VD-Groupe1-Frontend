@@ -10,6 +10,7 @@ import {Subscription} from 'rxjs';
 export class NavbarComponent implements OnInit, OnDestroy {
 
   isLogged = false;
+  role: string;
   private userSub: Subscription;
 
   constructor(private loginService: LoginService) { }
@@ -17,6 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userSub = this.loginService.user.subscribe(user => {
       this.isLogged = !!user;
+      this.role = user.role;
     });
   }
 

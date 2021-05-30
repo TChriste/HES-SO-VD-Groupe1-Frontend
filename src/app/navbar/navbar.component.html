@@ -4,7 +4,7 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-link" routerLink="/">Accueil</a>
+            <a class="button is-link" *ngIf="role === 'PATIENT'" routerLink="/">Accueil</a>
           </div>
         </div>
         <div class="navbar-item" *ngIf="!isLogged">
@@ -12,7 +12,7 @@
             <a class="button is-link" routerLink="/connexion-logopediste">Espace logopédistes</a>
           </div>
         </div>
-        <div class="navbar-item" *ngIf="isLogged">
+        <div class="navbar-item" *ngIf="isLogged && role === 'PATIENT'">
           <div class="buttons">
             <a class="button is-link" routerLink="/mon-compte">Mon compte</a>
           </div>
