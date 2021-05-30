@@ -71,3 +71,9 @@ export class Disponibilite {
     this.libelle = libelle;
   }
 }
+
+export class StatisticsModel {
+  public nbPatientsEnListeAttente: number;
+  public nbPatientsAcceptes: number;
+  public dureeAttenteEstimee: number;
+}

@@ -2,11 +2,11 @@
   <h2 class="title is-2">Dashboard</h2>
   <div class="columns mt-4">
     <div class="column is-3 has-text-centered">
-      <span class="big-number">12</span><br>
+      <span class="big-number">{{statistics?.nbPatientsEnListeAttente}}</span><br>
       <span>Patient(e)s en liste d'attente</span>
     </div>
     <div class="column is-3 has-text-centered">
-      <span class="big-number">25</span><br>
+      <span class="big-number">{{statistics?.nbPatientsAcceptes}}</span><br>
       <span>Patient(e)s accepté(e)s</span>
     </div>
     <div class="column is-3 has-text-centered">
@@ -14,7 +14,7 @@
       <span>Patient(e)s refusé(e)s</span>
     </div>
     <div class="column is-3 has-text-centered">
-      <span class="big-number">3 mois</span><br>
+      <span class="big-number">{{statistics?.dureeAttenteEstimee}}</span><br>
       <span>Estimation de la durée d'attente</span>
     </div>
   </div>

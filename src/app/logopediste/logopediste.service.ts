@@ -4,7 +4,7 @@ import {retry, catchError} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {BASE_URL} from '../config/config';
-import {ListeAttenteVueLogoModel} from './logopediste.model';
+import {ListeAttenteVueLogoModel, StatisticsModel} from './logopediste.model';
 
 
 @Injectable({
@@ -20,6 +20,13 @@ export class LogopedisteService {
 
   getListeAttente(idLogo: number): Observable<ListeAttenteVueLogoModel> {
     return this.httpClient.get<ListeAttenteVueLogoModel>(BASE_URL + '/logopediste/' + idLogo + '/liste-attente').pipe(
+      retry(1),
+      catchError(this.processError)
+    );
+  }
+
+  getStatistics(idListeAttente: number): Observable<StatisticsModel> {
+    return this.httpClient.get<StatisticsModel>(BASE_URL + '/logopediste/' + idListeAttente + '/statistics').pipe(
       retry(1),
       catchError(this.processError)
     );
