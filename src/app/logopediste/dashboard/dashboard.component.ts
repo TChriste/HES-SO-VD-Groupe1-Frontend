@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {LogopedisteService} from '../logopediste.service';
-import {LoginService} from '../../login/login.service';
+import {Component, Input, OnInit} from '@angular/core';
 import {StatisticsModel} from '../logopediste.model';
 
 @Component({
@@ -10,15 +8,11 @@ import {StatisticsModel} from '../logopediste.model';
 })
 export class DashboardComponent implements OnInit {
 
-  statistics: StatisticsModel;
+  @Input() statistics: StatisticsModel;
 
-  constructor(private logopedisteService: LogopedisteService,
-              private loginService: LoginService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.logopedisteService.getStatistics(this.loginService.user.value.id).subscribe(data => {
-      this.statistics = data;
-    });
   }
 
 }

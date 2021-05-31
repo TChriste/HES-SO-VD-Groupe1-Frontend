@@ -75,5 +75,6 @@ export class Disponibilite {
 export class StatisticsModel {
   public nbPatientsEnListeAttente: number;
   public nbPatientsAcceptes: number;
+  public nbPatientsRefuses: number;
   public dureeAttenteEstimee: number;
 }

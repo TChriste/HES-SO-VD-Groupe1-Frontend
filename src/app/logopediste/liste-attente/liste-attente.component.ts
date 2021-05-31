@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {LogopedisteService} from '../logopediste.service';
 import {DemandeDeBilanVueLogoModel} from '../logopediste.model';
 import {LoginService} from '../../login/login.service';
@@ -9,6 +9,9 @@ import {LoginService} from '../../login/login.service';
   styleUrls: ['./liste-attente.component.css']
 })
 export class ListeAttenteComponent implements OnInit {
+
+  @Output() refuserDemandeEvent = new EventEmitter();
+  @Output() accepterDemandeEvent = new EventEmitter();
 
   isLoading = false;
   idListeAttente: number;
@@ -50,6 +53,7 @@ export class ListeAttenteComponent implements OnInit {
       this.demandes = this.demandes.filter(demande => {
         return demande.id !== idDemandeDeBilan;
       });
+      this.refuserDemandeEvent.emit();
       }, errorMessage => {
       this.error = errorMessage;
     });
@@ -62,6 +66,7 @@ export class ListeAttenteComponent implements OnInit {
       this.demandes.filter(demande => {
         demande.statut = 'ACCEPTEE';
       });
+      this.accepterDemandeEvent.emit();
     }, errorMessage => {
       this.error = errorMessage;
     });

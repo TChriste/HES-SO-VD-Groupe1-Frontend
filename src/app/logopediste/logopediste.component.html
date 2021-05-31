@@ -1,6 +1,8 @@
 <section>
   <div class="container">
-    <app-dashboard></app-dashboard>
-    <app-liste-attente></app-liste-attente>
+    <app-dashboard [statistics]="statistics"></app-dashboard>
+    <app-liste-attente (refuserDemandeEvent)="refuserDemandeEvent($event)"
+                       (accepterDemandeEvent)="accepterDemandeEvent($event)"
+    ></app-liste-attente>
   </div>
 </section>
