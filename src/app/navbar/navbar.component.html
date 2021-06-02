@@ -18,6 +18,11 @@
           </div>
         </div>
       </div>
+      <div class="navbar-item" *ngIf="isLogged">
+        <div class="buttons">
+          <a class="button is-link" (click)="deconnexion()">Déconnexion</a>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
