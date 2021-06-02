@@ -76,8 +76,8 @@
                       </div>
                     </div>
                     <div class="column is-4">
-                      <p>Prochaine disponibilité estimée le 01.09.2021</p>
-                      <p>Nombre de patient(e)s en liste d'attente : 15</p>
+                      <p>Prochaine disponibilité estimée le {{calculProchaineDispo(item.dureeAttenteEstimee) | date}}</p>
+                      <p>Nombre de patient(e)s en liste d'attente : {{item.nbDemandesEnAttente}}</p>
                     </div>
                   </div>
                 </div>

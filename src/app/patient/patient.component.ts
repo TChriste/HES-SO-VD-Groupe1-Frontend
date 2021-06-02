@@ -7,6 +7,7 @@ import {SpecialisationService} from '../specialisation/specialisation.service';
 import {DemandeSuiviComponent} from './demande-suivi/demande-suivi.component';
 import {RegionModel} from '../region/region.model';
 import {RegionService} from '../region/region.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-patient',
@@ -103,5 +104,9 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   valueChangeModalActive(value: boolean) {
     this.isModalActive = value;
+  }
+
+  calculProchaineDispo(jours: number) {
+    return moment(new Date(), 'DD-MM-YYY').add(jours, 'days');
   }
 }

@@ -13,10 +13,14 @@ export class Patient {
 export class ListeAttente {
   public id: number;
   public logopediste: Logopediste;
+  public nbDemandesEnAttente: number;
+  public dureeAttenteEstimee: number;
 
-  constructor(id: number, logopediste: Logopediste) {
+  constructor(id: number, logopediste: Logopediste, nbDemandesEnAttente: number, dureeAttenteEstimee: number) {
     this.id = id;
     this.logopediste = logopediste;
+    this.nbDemandesEnAttente = nbDemandesEnAttente;
+    this.dureeAttenteEstimee = dureeAttenteEstimee;
   }
 }
 
