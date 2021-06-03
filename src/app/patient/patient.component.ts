@@ -2,7 +2,6 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {ListeAttente, Specialisation} from './patient.model';
 import {PatientService} from './patient.service';
-import {avatar} from '../avatar';
 import {SpecialisationService} from '../specialisation/specialisation.service';
 import {DemandeSuiviComponent} from './demande-suivi/demande-suivi.component';
 import {RegionModel} from '../region/region.model';
@@ -107,6 +106,6 @@ export class PatientComponent implements OnInit, AfterViewInit {
   }
 
   calculProchaineDispo(jours: number) {
-    return moment(new Date(), 'DD-MM-YYY').add(jours, 'days');
+    return moment(new Date(), 'DD-MM-YYY').add(jours, 'days').toDate();
   }
 }

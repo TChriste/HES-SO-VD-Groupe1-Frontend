@@ -11,9 +11,10 @@
             massa ultricies mi. At in tellus integer feugiat scelerisque varius morbi. Sagittis vitae et leo duis ut diam
             quam. Nullam eget felis eget nunc. Consectetur a erat nam at lectus urna duis. Ut diam quam nulla porttitor massa
             id neque aliquam vestibulum. Suscipit tellus mauris a diam maecenas.</p>
+          <button class="button mt-4" [routerLink]="['/connexion']" fragment="stats">En savoir plus ...</button>
         </div>
         <div class="column">
-          <h2 class="title is-4">Connexion</h2>
+          <h4 class="title is-4">Connexion</h4>
           <div class="message is-danger is-small" *ngIf="error">
             <div class="message-body">
               {{ error }}
@@ -43,6 +44,33 @@
               </p>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="hero-body">
+    <div class="container">
+      <h4 id="stats" class="title is-4">[Nom de la plateforme] en quelques chiffres</h4>
+      <div class="columns is-variable">
+        <div class="column is-9 has-text-centered">
+          <iframe src="https://www.google.com/maps/d/embed?mid=1j3Ed5zyjzAMlzG82Ab3FqVfoCNcDlhsJ" width="100%" height="480"></iframe>
+          <p><span>Localisation des logopédistes inscrits</span></p>
+        </div>
+        <div class="column is-3 has-text-centered">
+          <p class="mt-5">
+            <span class="big-number">{{this.statistics?.nbLogoInscrits}}</span><br>
+            <span>Logopédistes inscrits</span>
+          </p>
+          <p class="mt-5">
+            <span class="big-number">{{this.statistics?.nbDemandesDeBilans}}</span><br>
+            <span>Demandes de bilans effectuées</span>
+          </p>
+          <p class="mt-5">
+            <span class="big-number">{{this.statistics?.nbPatientsInscrits}}</span><br>
+            <span>Patients inscrits</span>
+          </p>
         </div>
       </div>
     </div>

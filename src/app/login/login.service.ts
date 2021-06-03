@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError, BehaviorSubject } from 'rxjs';
+import {catchError, retry, tap} from 'rxjs/operators';
+import {throwError, BehaviorSubject, Observable} from 'rxjs';
 import { Router } from '@angular/router';
 import {User} from './user.model';
 import {BASE_URL} from '../config/config';
 import {SignUpPatientModel} from './patient/sign-up-patient/sign-up-patient.model';
+import {StatisticsGeneralModel} from './StatisticsGeneral.model';
 
 export interface LoginResponseData {
   id: number;
@@ -95,6 +96,13 @@ export class LoginService {
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  getStatistics(): Observable<StatisticsGeneralModel> {
+    return this.http.get<StatisticsGeneralModel>(BASE_URL + '/statistiques').pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(errorRes: HttpErrorResponse) {

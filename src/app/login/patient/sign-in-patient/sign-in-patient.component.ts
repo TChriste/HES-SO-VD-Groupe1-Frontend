@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import {LoginResponseData, LoginService} from '../../login.service';
 import {Observable} from 'rxjs';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
+import {StatisticsGeneralModel} from '../../StatisticsGeneral.model';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,24 @@ export class SignInPatientComponent implements OnInit {
   faEnvelope = faEnvelope;
   faLock = faLock;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  statistics: StatisticsGeneralModel;
+
+  constructor(private loginService: LoginService, private router: Router, private route: ActivatedRoute) {
+    router.events.subscribe(s => {
+      if (s instanceof NavigationEnd) {
+        const tree = router.parseUrl(router.url);
+        if (tree.fragment) {
+          const element = document.querySelector('#' + tree.fragment);
+          if (element) { element.scrollIntoView(true); }
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
+    this.loginService.getStatistics().subscribe(data => {
+      this.statistics = data;
+    });
   }
 
   onSubmit(form: NgForm) {
