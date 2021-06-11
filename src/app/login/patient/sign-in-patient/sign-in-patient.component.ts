@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import {LoginResponseData, LoginService} from '../../login.service';

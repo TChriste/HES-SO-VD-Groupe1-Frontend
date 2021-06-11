@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userSub = this.loginService.user.subscribe(user => {
       this.isLogged = !!user;
-      this.role = user.role;
+      this.role = user?.role;
     });
   }
 
@@ -27,6 +27,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   deconnexion() {
+    this.isLogged = false;
+    this.role = '';
     this.loginService.logout();
   }
 }

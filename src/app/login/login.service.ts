@@ -19,6 +19,8 @@ export interface LoginResponseData {
 @Injectable({providedIn: 'root'})
 export class LoginService {
   user = new BehaviorSubject<User>(null);
+  isLoggedIn = false;
+  role: string;
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -29,6 +31,8 @@ export class LoginService {
         BASE_URL + '/patient/sign-in',
         { email, password }
       ).pipe(catchError(this.handleError), tap(resData => {
+        this.isLoggedIn = true;
+        this.role = 'PATIENT';
         this.handleAuthentication(resData.id, resData.email, resData.numPrestataire, resData.nom, resData.prenom, 'PATIENT', 'NON_GERE', 3600);
       }));
   }
@@ -39,6 +43,8 @@ export class LoginService {
         BASE_URL + '/logopediste/sign-in',
         { numPrestataire, password }
       ).pipe(catchError(this.handleError), tap(resData => {
+        this.isLoggedIn = true;
+        this.role = 'LOGOPEDISTE';
         this.handleAuthentication(resData.id, null, resData.numPrestataire, resData.nom, resData.prenom, 'LOGOPEDISTE', 'NON_GERE', 3600);
       }));
   }
@@ -76,6 +82,8 @@ export class LoginService {
   }
 
   logout() {
+    this.isLoggedIn = false;
+    this.role = '';
     this.user.next(null);
     this.router.navigate(['/connexion']);
     localStorage.removeItem('userData');
