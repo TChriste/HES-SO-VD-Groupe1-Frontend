@@ -1,16 +1,19 @@
 <section>
   <div class="container">
-      <div class="description">
-        <h2 class="title is-2">Listes d'attente</h2>
-        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at
-          its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as
-          opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing
-          packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will
-          uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by
-          accident, sometimes on purpose (injected humour and the like).</p>
-      </div>
-      <div class="filtres mt-4">
-        <form #filtreForm="ngForm" (ngSubmit)="onSubmitFiltres(filtreForm)">
+    <div class="description">
+      <h2 class="title is-2">Listes d'attente</h2>
+      <p>Bienvenue sur FindMyLogo.ch ! <br>
+        Vous trouverez, ci-dessous, les différentes listes d’attente des logopédistes du canton de Vaud. Vous pouvez
+        affiner votre recherche à l’aide des filtres par région et/ou par spécialisation.
+        Sélectionnez à l’aide des cases à cocher, les logopédistes sur lesquels vous voulez inscrire votre enfant en
+        liste d’attente et cliquez sur « Suivant ». Répondez aux différentes questions pour aider le logopédiste à mieux
+        comprendre le besoin. Une fois cela effectué, vous serez contacté par un logopédiste dans les plus brefs délais
+        pour débuter un suivi.
+        Vous pouvez consulter le statut de vos demandes dans l’espace « Mon compte ».
+      </p>
+    </div>
+    <div class="filtres mt-4">
+      <form #filtreForm="ngForm" (ngSubmit)="onSubmitFiltres(filtreForm)">
         <div class="columns">
           <div class="column is-2">
             <div class="select">
@@ -26,7 +29,8 @@
             <div class="select">
               <select [(ngModel)]="specialisationSelected" name="ecole">
                 <option [ngValue]="null" selected="selected">Toutes</option>
-                <option *ngFor="let specialisation of specialisations" [ngValue]="specialisation">{{specialisation.libelle}}</option>
+                <option *ngFor="let specialisation of specialisations"
+                        [ngValue]="specialisation">{{specialisation.libelle}}</option>
               </select>
             </div>
           </div>
@@ -38,66 +42,67 @@
             </div>
           </div>
         </div>
-        </form>
-      </div>
-      <hr>
-      <div *ngIf="isLoading" style="text-align: center;">
-        <app-loading-spinner></app-loading-spinner>
-      </div>
-      <form [formGroup]="form" *ngIf="!isLoading">
-        <div class="listes-attentes mt-4">
-            <div formGroupName="checkboxes">
-              <div class="card mt-4" *ngFor="let item of listesAttente">
-                <div class="card-content">
+      </form>
+    </div>
+    <hr>
+    <div *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <form [formGroup]="form" *ngIf="!isLoading">
+      <div class="listes-attentes mt-4">
+        <div formGroupName="checkboxes">
+          <div class="card mt-4" *ngFor="let item of listesAttente">
+            <div class="card-content">
+              <div class="columns is-vcentered">
+                <div class="column is-2">
                   <div class="columns is-vcentered">
-                    <div class="column is-2">
-                      <div class="columns is-vcentered">
-                        <div class="column is-3">
-                          <label class="checkbox">
-                            <input type="checkbox" [formControlName]="item.id" [value]="item.id" />
-                          </label>
-                        </div>
-                        <div class="column is-9">
-                          <app-avatar-img></app-avatar-img>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="column is-2">
-                      <p><strong>{{item.logopediste.nom}} {{item.logopediste.prenom}}</strong></p>
-                      <p>
-                        {{item.logopediste.rue}} <br>
-                        {{item.logopediste.npa}} {{item.logopediste.localite}}
-                      </p>
-                    </div>
                     <div class="column is-3">
-                      <p><strong>Spécialisation(s)</strong></p>
-                      <div class="tags are-medium">
-                        <span *ngFor="let specialisation of item.logopediste.specialisations" class="tag is-primary is-medium">{{specialisation.libelle}}</span>
-                      </div>
+                      <label class="checkbox">
+                        <input type="checkbox" [formControlName]="item.id" [value]="item.id"/>
+                      </label>
                     </div>
-                    <div class="column is-4">
-                      <p>Prochaine disponibilité estimée le {{calculProchaineDispo(item.dureeAttenteEstimee) | date}}</p>
-                      <p>Nombre de patient(e)s en liste d'attente : {{item.nbDemandesEnAttente}}</p>
+                    <div class="column is-9">
+                      <app-avatar-img></app-avatar-img>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="columns mt-4">
-              <div class="column is-4 is-offset-8">
-                <div class="form-group field ">
-                  <p class="control has-text-centered mt-1">
-                    <button class="button is-primary is-fullwidth" (click)="onSuivant()">Suivant</button>
+                <div class="column is-2">
+                  <p><strong>{{item.logopediste.nom}} {{item.logopediste.prenom}}</strong></p>
+                  <p>
+                    {{item.logopediste.rue}} <br>
+                    {{item.logopediste.npa}} {{item.logopediste.localite}}
                   </p>
+                </div>
+                <div class="column is-3">
+                  <p><strong>Spécialisation(s)</strong></p>
+                  <div class="tags are-medium">
+                    <span *ngFor="let specialisation of item.logopediste.specialisations"
+                          class="tag is-primary is-medium">{{specialisation.libelle}}</span>
+                  </div>
+                </div>
+                <div class="column is-4">
+                  <p>Prochaine disponibilité estimée le {{calculProchaineDispo(item.dureeAttenteEstimee) | date}}</p>
+                  <p>Nombre de patient(e)s en liste d'attente : {{item.nbDemandesEnAttente}}</p>
                 </div>
               </div>
             </div>
+          </div>
         </div>
-        <app-demande-suivi [isModalActive]="isModalActive"
-                           [form]="form"
-                           (isModalActiveEvent)="valueChangeModalActive($event)"
-                           [idsListesSelectionnees]="idsListesSelectionnees">
-        </app-demande-suivi>
-      </form>
+        <div class="columns mt-4">
+          <div class="column is-4 is-offset-8">
+            <div class="form-group field ">
+              <p class="control has-text-centered mt-1">
+                <button class="button is-primary is-fullwidth" (click)="onSuivant()">Suivant</button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-demande-suivi [isModalActive]="isModalActive"
+                         [form]="form"
+                         (isModalActiveEvent)="valueChangeModalActive($event)"
+                         [idsListesSelectionnees]="idsListesSelectionnees">
+      </app-demande-suivi>
+    </form>
   </div>
 </section>
