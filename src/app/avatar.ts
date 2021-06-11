@@ -8,18 +8,12 @@ export const avatar = {
     'Eyepatch',
     'Hat',
     'Hijab',
-    'Turban',
-    'WinterHat1',
-    'WinterHat2',
-    'WinterHat3',
-    'WinterHat4',
     'LongHairBigHair',
     'LongHairBob',
     'LongHairBun',
     'LongHairCurly',
     'LongHairCurvy',
     'LongHairDreads',
-    'LongHairFrida',
     'LongHairFro',
     'LongHairFroBand',
     'LongHairNotTooLong',
@@ -41,15 +35,8 @@ export const avatar = {
     'ShortHairTheCaesarSidePart'
   ],
   accessoriesType: [
-    'Blank',
-    'Kurt',
-    'Prescription01',
-    'Prescription02',
-    'Round',
-    'Sunglasses',
-    'Wayfarers'
+    'Blank'
   ],
-
   hairColor: [
     'Auburn',
     'Black',
@@ -82,29 +69,19 @@ export const avatar = {
     'ShirtVNeck'
   ],
   eyeType: [
-    'Close',
-    'Cry',
     'Default',
-    'Dizzy',
     'EyeRoll',
     'Happy',
-    'Hearts',
     'Side',
-    'Squint',
-    'Surprised',
     'Wink',
     'WinkWacky'
   ],
   eyebrowType: [
-    'Angry',
-    'AngryNatural',
     'Default',
     'DefaultNatural',
     'FlatNatural',
     'RaisedExcited',
     'RaisedExcitedNatural',
-    'SadConcerned',
-    'SadConcernedNatural',
     'UnibrowNatural',
     'UpDown',
     'UpDownNatural'
@@ -113,15 +90,9 @@ export const avatar = {
     'Concerned',
     'Default',
     'Disbelief',
-    'Eating',
-    'Grimace',
-    'Sad',
-    'ScreamOpen',
     'Serious',
     'Smile',
-    'Tongue',
-    'Twinkle',
-    'Vomit'
+    'Twinkle'
   ],
   skinColor: [
     'Tanned',

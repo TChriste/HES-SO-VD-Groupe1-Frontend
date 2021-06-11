@@ -12,7 +12,7 @@
         Vous pouvez consulter le statut de vos demandes dans l’espace « Mon compte ».
       </p>
     </div>
-    <div class="filtres mt-4">
+    <div class="filtres mt-4" *ngIf="!regionIsLoading && !specialisationIsLoading">
       <form #filtreForm="ngForm" (ngSubmit)="onSubmitFiltres(filtreForm)">
         <div class="columns">
           <div class="column is-2">
@@ -48,10 +48,10 @@
     <div *ngIf="isLoading" style="text-align: center;">
       <app-loading-spinner></app-loading-spinner>
     </div>
-    <form [formGroup]="form" *ngIf="!isLoading">
+    <form [formGroup]="form">
       <div class="listes-attentes mt-4">
-        <div formGroupName="checkboxes">
-          <div class="card mt-4" *ngFor="let item of listesAttente">
+        <div formGroupName="checkboxes" *ngIf="!isLoading">
+          <div class="card mt-4" *ngFor="let item of listesAttentePage.listeAttente">
             <div class="card-content">
               <div class="columns is-vcentered">
                 <div class="column is-2">
@@ -88,6 +88,15 @@
             </div>
           </div>
         </div>
+
+        <nav class="pagination mt-4" role="navigation" aria-label="pagination">
+          <ul class="pagination-list">
+            <li *ngFor='let in of counter(listesAttentePage?.nbPages)  ;let i = index'>
+              <a class="pagination-link" [class.is-current]="this.page == i" (click)="changePage(i)">{{i+1}}</a>
+            </li>
+          </ul>
+        </nav>
+
         <div class="columns mt-4">
           <div class="column is-4 is-offset-8">
             <div class="form-group field ">

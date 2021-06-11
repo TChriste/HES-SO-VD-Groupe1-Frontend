@@ -10,6 +10,12 @@ export class Patient {
   }
 }
 
+export class PageListeAttente {
+  public listeAttente: ListeAttente[];
+  public nbPages: number;
+  public nombreOccurences: number;
+}
+
 export class ListeAttente {
   public id: number;
   public logopediste: Logopediste;

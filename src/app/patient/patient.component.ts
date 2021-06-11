@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
-import {ListeAttente, Specialisation} from './patient.model';
+import {ListeAttente, PageListeAttente, Specialisation} from './patient.model';
 import {PatientService} from './patient.service';
 import {SpecialisationService} from '../specialisation/specialisation.service';
 import {DemandeSuiviComponent} from './demande-suivi/demande-suivi.component';
@@ -17,6 +17,9 @@ export class PatientComponent implements OnInit, AfterViewInit {
   @ViewChild(DemandeSuiviComponent) demandeSuiviComponent: DemandeSuiviComponent;
 
   isLoading = false;
+  regionIsLoading = false;
+  specialisationIsLoading = false;
+  page: number;
 
   specialisations: Specialisation[];
   specialisationSelected: Specialisation;
@@ -24,8 +27,8 @@ export class PatientComponent implements OnInit, AfterViewInit {
   regions: RegionModel[];
   regionSelected: RegionModel;
 
-  listesAttente: ListeAttente[];
-  listesAttenteComplete: ListeAttente[];
+  listesAttentePage: PageListeAttente;
+  listesAttenteComplete: PageListeAttente;
   form: FormGroup;
 
   idsListesSelectionnees = [];
@@ -38,29 +41,37 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.isModalActive = false;
+    this.page = 0;
 
     this.form = this.formBuilder.group({
       checkboxes: this.formBuilder.group({}),
     });
-
-    this.isLoading = true;
-    this.patientService.getListesAttente().subscribe(data => {
-      this.listesAttente = data;
-      this.isLoading = false;
-      this.listesAttenteComplete = data;
-      const checkboxes = this.form.get('checkboxes') as FormGroup;
-      this.listesAttente.forEach((option: any) => {
-        checkboxes.addControl(option.id, new FormControl(false));
-      });
-    });
+    this.loadListeAttentes();
     this.specialisationSelected = null;
+    this.specialisationIsLoading = true;
     this.specialisationService.getSpecialisations().subscribe( resData => {
       this.specialisations = resData;
+      this.specialisationIsLoading = false;
     });
 
     this.regionSelected = null;
+    this.regionIsLoading = true;
     this.regionService.getRegions().subscribe( resData => {
       this.regions = resData;
+      this.regionIsLoading = false;
+    });
+  }
+
+  private loadListeAttentes() {
+    this.isLoading = true;
+    this.patientService.getListesAttente(this.page, this.regionSelected, this.specialisationSelected).subscribe(data => {
+      this.listesAttentePage = data;
+      this.isLoading = false;
+      this.listesAttenteComplete = data;
+      const checkboxes = this.form.get('checkboxes') as FormGroup;
+      this.listesAttentePage.listeAttente.forEach((option: any) => {
+        checkboxes.addControl(option.id, new FormControl(false));
+      });
     });
   }
 
@@ -70,22 +81,8 @@ export class PatientComponent implements OnInit, AfterViewInit {
   }
 
   onSubmitFiltres(form: NgForm) {
-    if (this.specialisationSelected && this.regionSelected) {
-      this.listesAttente = this.listesAttenteComplete.filter(
-        liste => (liste.logopediste.specialisations.some(specialisation => specialisation.id === this.specialisationSelected.id)) &&
-                 (liste.logopediste.idRegion === this.regionSelected.id)
-      );
-    } else if (this.regionSelected) {
-      this.listesAttente = this.listesAttenteComplete.filter(
-        liste => (liste.logopediste.idRegion === this.regionSelected.id)
-      );
-    } else if (this.specialisationSelected) {
-      this.listesAttente = this.listesAttenteComplete.filter(
-        liste => (liste.logopediste.specialisations.some(specialisation => specialisation.id === this.specialisationSelected.id))
-      );
-    } else {
-      this.listesAttente = this.listesAttenteComplete;
-    }
+    this.page = 1;
+    this.loadListeAttentes();
   }
 
   onSuivant() {
@@ -107,5 +104,14 @@ export class PatientComponent implements OnInit, AfterViewInit {
 
   calculProchaineDispo(jours: number) {
     return moment(new Date(), 'DD-MM-YYY').add(jours, 'days').toDate();
+  }
+
+  counter(i: number) {
+    return new Array(i);
+  }
+
+  changePage(page: number) {
+    this.page = page;
+    this.loadListeAttentes();
   }
 }

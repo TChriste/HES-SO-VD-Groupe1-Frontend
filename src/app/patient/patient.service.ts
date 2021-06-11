@@ -1,11 +1,13 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {retry, catchError} from 'rxjs/operators';
 
-import {Disponibilite, ListeAttente} from './patient.model';
+import {Disponibilite, ListeAttente, PageListeAttente} from './patient.model';
 import {Observable, throwError} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {BASE_URL} from '../config/config';
 import {DemandeDeBilanCrationModel, DemandeDeBilanModel} from './demande-suivi/demande-de-bilan.model';
+import {RegionModel} from '../region/region.model';
+import {SpecialisationModel} from '../specialisation/specialisation.model';
 
 
 @Injectable({
@@ -19,8 +21,17 @@ export class PatientService {
   ) {}
 
 
-  getListesAttente(): Observable<ListeAttente[]> {
-    return this.httpClient.get<ListeAttente[]>(BASE_URL + '/liste-attente').pipe(
+  getListesAttente(page: number, region: RegionModel, specialisation: SpecialisationModel): Observable<PageListeAttente> {
+    let params = new HttpParams();
+    params = params.append('page', page.toString());
+    if (region) {
+      params = params.append('region', region.id.toString());
+    }
+    if (specialisation) {
+      params = params.append('specialisation', specialisation.id.toString());
+    }
+
+    return this.httpClient.get<PageListeAttente>(BASE_URL + '/liste-attente', {params}).pipe(
       retry(1),
       catchError(this.processError)
     );
