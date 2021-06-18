@@ -81,7 +81,7 @@ export class PatientComponent implements OnInit, AfterViewInit {
   }
 
   onSubmitFiltres(form: NgForm) {
-    this.page = 1;
+    this.page = 0;
     this.loadListeAttentes();
   }
 

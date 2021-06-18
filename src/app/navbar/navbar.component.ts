@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   role: string;
   private userSub: Subscription;
 
-  constructor(private loginService: LoginService) { }
+  constructor(public loginService: LoginService) { }
 
   ngOnInit(): void {
     this.userSub = this.loginService.user.subscribe(user => {
